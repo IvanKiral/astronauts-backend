@@ -44,9 +44,9 @@ public class AstronautControllerTest
             .Returns(AstronautHelpers.MissingAstronaut);
         var controller = new AstronautController(service, _mapper);
         
-        var requestModel = ToAstronautRequest(MissingAstronaut);
+        var requestModel = MissingAstronaut.ToAstronautRequest();
         var result = await controller.CreateAstronaut(requestModel);
-        var expectedResult = ToAstronautResponse(MissingAstronaut);
+        var expectedResult = MissingAstronaut.ToAstronautResponse();
 
         result.Value.Should().BeEquivalentTo(expectedResult);
     }
@@ -55,11 +55,11 @@ public class AstronautControllerTest
     public async void AddAstronaut_ReturnsBadRequest()
     {
         var service = Substitute.For<IAstronautService>();
-        service.AddAstronaut(Arg.Is<AddAstronaut>(a => a.Name == SecondAstronaut.Name))
+        service.AddAstronaut(Arg.Is<AddAstronaut>(a => a.Name == MissingAstronaut.Name))
             .Throws<ArgumentException>();
         var controller = new AstronautController(service, _mapper);
         
-        var requestModel = ToAstronautRequest(SecondAstronaut);
+        var requestModel = MissingAstronaut.ToAstronautRequest();
         var result = await controller.CreateAstronaut(requestModel);
 
         result.Result.Should().BeOfType<BadRequestResult>();
@@ -72,16 +72,16 @@ public class AstronautControllerTest
         var service = Substitute.For<IAstronautService>();
         var serviceResultAstronaut = AstronautUtils.MakeAstronaut(
             SecondAstronaut.Id,
-            ToAddAstronaut(MissingAstronaut)
+            MissingAstronaut.ToAddAstronaut()
         );
         service.UpdateAstronaut(SecondAstronaut.Id,
                 Arg.Is<AddAstronaut>(a => a.Name == MissingAstronaut.Name))
             .Returns(serviceResultAstronaut);
         var controller = new AstronautController(service, _mapper);
         
-        var requestModel = ToAstronautRequest(MissingAstronaut);
+        var requestModel = MissingAstronaut.ToAstronautRequest();
         var result = await controller.UpdateAstronaut(SecondAstronaut.Id, requestModel);
-        var expectedResult = ToAstronautResponse(serviceResultAstronaut);
+        var expectedResult = serviceResultAstronaut.ToAstronautResponse();
 
         result.Value.Should().BeEquivalentTo(expectedResult);
     }
@@ -94,7 +94,7 @@ public class AstronautControllerTest
             .Throws<ArgumentException>();
         var controller = new AstronautController(service, _mapper);
         
-        var requestModel = ToAstronautRequest(MissingAstronaut);
+        var requestModel = MissingAstronaut.ToAstronautRequest();
         var result = await controller.UpdateAstronaut(MissingAstronaut.Id, requestModel);
 
         result.Result.Should().BeOfType<BadRequestResult>();

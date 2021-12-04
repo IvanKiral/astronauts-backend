@@ -15,7 +15,7 @@ public class AstronautRepositoryTest
 {
     private IAsyncEnumerable<AstronautDao> _astronauts = GetAstronautDaosAsync();
     private IMapper _mapper = Mapper.GetMapperInstance();
-    private AstronautDao MissingAstronautDao = ToAstronautDao(MissingAstronaut);
+    private AstronautDao MissingAstronautDao = MissingAstronaut.ToAstronautDao();
 
     [Fact]
     public async void GetAllAstronauts_ReturnsAllAstronauts()
@@ -46,9 +46,9 @@ public class AstronautRepositoryTest
     public async void UpdateAstronaut_ReturnsAstronaut()
     {
         var cosmosRepository = Substitute.For<ICosmosRepository<AstronautDao>>();
-        var resultAstronaut = AstronautUtils.MakeAstronaut(SecondAstronaut.Id, ToAddAstronaut(MissingAstronaut));
+        var resultAstronaut = AstronautUtils.MakeAstronaut(SecondAstronaut.Id, MissingAstronaut.ToAddAstronaut());
         cosmosRepository.Update(SecondAstronaut.Id, Arg.Is<AstronautDao>(a => a.Name == MissingAstronautDao.Name))
-            .Returns(ToAstronautDao(resultAstronaut));
+            .Returns(resultAstronaut.ToAstronautDao());
         var repository = new AstronautRepository(cosmosRepository, _mapper);
             
         var result = await repository.UpdateAstronaut(resultAstronaut);
@@ -61,7 +61,7 @@ public class AstronautRepositoryTest
     {
         var cosmosRepository = Substitute.For<ICosmosRepository<AstronautDao>>();
         cosmosRepository.Delete(SecondAstronaut.Id)
-            .Returns(Task.FromResult(ToAstronautDao(SecondAstronaut)));
+            .Returns(Task.FromResult(SecondAstronaut.ToAstronautDao()));
         var repository = new AstronautRepository(cosmosRepository, _mapper);
             
         await repository.DeleteAstronaut(SecondAstronaut.Id);
