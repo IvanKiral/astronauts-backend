@@ -32,7 +32,7 @@ public static class AstronautHelpers
         Birthday = DateTime.Now,
         Ability = "Ability3"
     };
-    
+
     public static AstronautRequestModel ToAstronautRequest(Astronaut astronautDto) => new()
     {
         Name = astronautDto.Name,
@@ -80,7 +80,7 @@ public static class AstronautHelpers
         yield return ToAstronautDao(SecondAstronaut);;
     }
 
-    private static AstronautDao ToAstronautDao(Astronaut astronautDto) => new()
+    public static AstronautDao ToAstronautDao(Astronaut astronautDto) => new()
     {
         Id = astronautDto.Id,
         Pk = astronautDto.Id,
