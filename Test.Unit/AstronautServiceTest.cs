@@ -34,7 +34,7 @@ public class AstronautServiceTest
         repository.AddAstronaut(Arg.Is<Astronaut>(a => a.Name == MissingAstronaut.Name)).Returns(MissingAstronaut);
         var service = new AstronautService(repository);
 
-        var result = await service.AddAstronaut(ToAddAstronaut(MissingAstronaut));
+        var result = await service.AddAstronaut(MissingAstronaut.ToAddAstronaut());
         
         result.Should().BeEquivalentTo(MissingAstronaut);
     }
@@ -43,11 +43,11 @@ public class AstronautServiceTest
     public async void UpdateAstronaut_ReturnsAstronaut()
     {
         var repository = Substitute.For<IAstronautRepository>();
-        var resultAstronaut = AstronautUtils.MakeAstronaut(SecondAstronaut.Id, ToAddAstronaut(MissingAstronaut));
+        var resultAstronaut = AstronautUtils.MakeAstronaut(SecondAstronaut.Id, MissingAstronaut.ToAddAstronaut());
         repository.UpdateAstronaut(Arg.Is<Astronaut>(a => a.Name == MissingAstronaut.Name)).Returns(resultAstronaut);
         var service = new AstronautService(repository);
 
-        var result = await service.UpdateAstronaut(SecondAstronaut.Id, ToAddAstronaut(MissingAstronaut));
+        var result = await service.UpdateAstronaut(SecondAstronaut.Id, MissingAstronaut.ToAddAstronaut());
         
         result.Should().BeEquivalentTo(resultAstronaut);
     }

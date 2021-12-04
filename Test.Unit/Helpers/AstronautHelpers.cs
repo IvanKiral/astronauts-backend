@@ -33,7 +33,7 @@ public static class AstronautHelpers
         Ability = "Ability3"
     };
 
-    public static AstronautRequestModel ToAstronautRequest(Astronaut astronautDto) => new()
+    public static AstronautRequestModel ToAstronautRequest(this Astronaut astronautDto) => new()
     {
         Name = astronautDto.Name,
         Surname = astronautDto.Surname,
@@ -41,7 +41,7 @@ public static class AstronautHelpers
         Birthday = astronautDto.Birthday
     };
     
-    public static AstronautResponseModel ToAstronautResponse(Astronaut astronaut) => 
+    public static AstronautResponseModel ToAstronautResponse(this Astronaut astronaut) => 
         new() 
         {
             Id = astronaut.Id,
@@ -51,7 +51,7 @@ public static class AstronautHelpers
             Ability = astronaut.Ability
         };
 
-    public static AddAstronaut ToAddAstronaut(Astronaut astronaut) => 
+    public static AddAstronaut ToAddAstronaut(this Astronaut astronaut) => 
         new() 
         {
             Name = astronaut.Name,
@@ -80,7 +80,7 @@ public static class AstronautHelpers
         yield return ToAstronautDao(SecondAstronaut);;
     }
 
-    public static AstronautDao ToAstronautDao(Astronaut astronautDto) => new()
+    public static AstronautDao ToAstronautDao(this Astronaut astronautDto) => new()
     {
         Id = astronautDto.Id,
         Pk = astronautDto.Id,
