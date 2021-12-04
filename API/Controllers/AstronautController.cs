@@ -41,7 +41,7 @@ public class AstronautController: ControllerBase
     
     [HttpPost]
     [Route("")]
-    public async Task<ActionResult<AstronautResponseModel>> CreateNote([FromBody] AstronautRequestModel requestModel)
+    public async Task<ActionResult<AstronautResponseModel>> CreateAstronaut([FromBody] AstronautRequestModel requestModel)
     {
         try
         {
@@ -58,7 +58,7 @@ public class AstronautController: ControllerBase
 
     [HttpPut]
     [Route("{id:guid}")]
-    public async Task<ActionResult<AstronautResponseModel>> UpdateNote([FromRoute] Guid id,
+    public async Task<ActionResult<AstronautResponseModel>> UpdateAstronaut([FromRoute] Guid id,
         [FromBody] AstronautRequestModel requestModel)
     {
         try
@@ -76,7 +76,7 @@ public class AstronautController: ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
-    public async Task<ActionResult> DeleteNote([FromRoute] Guid id)
+    public async Task<ActionResult> DeleteAstronaut([FromRoute] Guid id)
     {
         try
         {
