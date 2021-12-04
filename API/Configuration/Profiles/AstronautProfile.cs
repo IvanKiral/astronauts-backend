@@ -9,5 +9,6 @@ public class AstronautProfile: Profile
     public AstronautProfile()
     {
         CreateMap<Astronaut, AstronautResponseModel>();
+        CreateMap<AstronautRequestModel, AddAstronaut>();
     }
 }
