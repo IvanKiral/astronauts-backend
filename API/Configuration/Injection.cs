@@ -1,7 +1,7 @@
 ﻿using API.Repository;
 using API.Services;
 
-namespace API.Profiles;
+namespace API.Configuration;
 
 public static class Injection
 {
@@ -9,5 +9,6 @@ public static class Injection
     {
         services.AddScoped<IAstronautService, AstronautService>();
         services.AddSingleton<IAstronautRepository, InMemoryAstronautRepository>();
+        services.AddSingleton(Mapper.GetMapperInstance());
     }
 }
