@@ -17,14 +17,16 @@ public class AstronautService: IAstronautService
 
     public async Task<Astronaut> AddAstronaut(AddAstronaut astronaut)
     {
-        var newAstronaut = AstronautUtils.MakeAstronaut(astronaut);
+        var newAstronaut = AstronautUtils.MakeAstronaut(Guid.NewGuid(), astronaut);
 
         return await _repository.AddAstronaut(newAstronaut);
     }
 
-    public async Task<Astronaut> UpdateAstronaut(Astronaut astronaut)
+    public async Task<Astronaut> UpdateAstronaut(Guid id, AddAstronaut astronaut)
     {
-        return await _repository.UpdateAstronaut(astronaut);
+        var updateAstronaut = AstronautUtils.MakeAstronaut(id, astronaut);
+        
+        return await _repository.UpdateAstronaut(updateAstronaut);
     }
 
     public async Task DeleteAstronaut(Guid id) => await _repository.DeleteAstronaut(id);

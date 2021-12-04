@@ -8,7 +8,7 @@ public interface IAstronautService
 
     public Task<Astronaut> AddAstronaut(AddAstronaut astronaut);
 
-    public Task<Astronaut> UpdateAstronaut(Astronaut astronaut);
+    public Task<Astronaut> UpdateAstronaut(Guid id, AddAstronaut astronaut);
 
     public Task DeleteAstronaut(Guid id);
 

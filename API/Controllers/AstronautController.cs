@@ -64,7 +64,7 @@ public class AstronautController: ControllerBase
         try
         {
             var astronautModel = _mapper.Map<AstronautRequestModel, AddAstronaut>(requestModel);
-            var astronaut = await _astronautService.AddAstronaut(astronautModel);
+            var astronaut = await _astronautService.UpdateAstronaut(id, astronautModel);
 
             return _mapper.Map<Astronaut, AstronautResponseModel>(astronaut);
         }
