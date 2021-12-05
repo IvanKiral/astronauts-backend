@@ -9,10 +9,11 @@ public static class DatabaseConnector
     private static Container _container;
     private const string DatabaseId = "ToDoList";
     private const string ContainerId = "Items";
+    
         
-    public static Container GetNotesContainer()
+    public static Container GetNotesContainer(string dbContext)
     {
-        _cosmosClient = CosmosDbClientFactory.GetClient();
+        _cosmosClient = CosmosDbClientFactory.GetClient(dbContext);
         _container =  _cosmosClient.GetContainer(DatabaseId, ContainerId);
         return _container;
     }
