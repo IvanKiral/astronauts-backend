@@ -6,9 +6,9 @@ namespace API.Configuration;
 
 public static class Injection
 {
-    public static void RegisterDependencies(this IServiceCollection services)
+    public static void RegisterDependencies(this IServiceCollection services, string databaseConnection)
     {
-        services.AddSingleton(DatabaseConnector.GetNotesContainer());
+        services.AddSingleton(DatabaseConnector.GetNotesContainer(databaseConnection));
         services.AddSingleton(Mapper.GetMapperInstance());
         services.AddSingleton<ICosmosRepository<Astronaut>, CosmosRepository<Astronaut>>();
         services.AddSingleton<IAstronautRepository, AstronautRepository>();
